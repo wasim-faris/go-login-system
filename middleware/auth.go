@@ -1,8 +1,11 @@
 package middleware
 
 import (
+	"log"
 	"net/http"
 	"strings"
+
+	"authentication/helpers"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,6 +13,7 @@ import (
 
 func Authenticate() gin.HandlerFunc{
 	return func(c *gin.Context) {
+
 		authHeader:=c.GetHeader("Authorization")
 
 		if authHeader ==""{
@@ -17,13 +21,15 @@ func Authenticate() gin.HandlerFunc{
 			c.Abort()
 			return
 		}
-		authHeader = strings.TrimPrefix(authHeader, "Bearer")
+		authHeader = strings.TrimPrefix(authHeader, "Bearer ")
 
-		claims,err := ValidateToken(authHeader)
+		_,err := helpers.ValidateToken(authHeader)
 
 		if err != nil{
-			log.printf("token validation error %v", err)
-			c.JSON(http.StatusUnauthorized.gin.H("error":"invalid token"))
+			log.Printf("token validation error %v", err)
+			c.JSON(http.StatusUnauthorized, gin.H{
+	"error": "invalid token",
+})
 			c.Abort()
 			return
 		}

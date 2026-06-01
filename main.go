@@ -1,17 +1,21 @@
-package authenticationgo
-
-import (
-	"authentication/routes"
-	"fmt"
-	"log"
-)
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"authentication/config"
+	"authentication/helpers"
+	"authentication/routes"
+	"log"
+
+	"github.com/gin-gonic/gin"
+)
+
+
+
 
 func main(){
-	key:=GenerateRandomKey()
-	SetJwtKey(key)
+	port := "8080"
+	key:=config.GenerateRandomKey()
+	helpers.SetJwtKey(key)
 
 	r:=gin.Default()
 	routes.SetupRoutes(r)

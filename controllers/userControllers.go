@@ -1,17 +1,19 @@
 package controllers
 
-func Signup(){
+import "github.com/gin-gonic/gin"
+
+func Signup(c *gin.Context){
 
 }
 
-func Login(){
+func Login(c *gin.Context){
 
 }
 
-func GetUser(){
+func GetUser(c *gin.Context){
 
 }
 
-func GetUsers(){
+func GetUsers(c *gin.Context){
 	
 }

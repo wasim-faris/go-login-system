@@ -7,8 +7,8 @@ import (
 	"authentication/middleware"
 )
 func SetupRoutes(router *gin.Engine){
-	router.POST("/signup", controllers.Signup())
-	router.POST("/login", controllers.Login())
+	router.POST("/signup", controllers.Signup)
+	router.POST("/login", controllers.Login)
 
 	protected:=router.Group("/")
 	protected.Use(middleware.Authenticate())
