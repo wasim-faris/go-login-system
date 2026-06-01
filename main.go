@@ -12,13 +12,18 @@ import (
 
 
 
-func main(){
+func main() {
+	config.ConnectDb()
+
 	port := "8080"
-	key:=config.GenerateRandomKey()
+
+	key := config.GenerateRandomKey()
 	helpers.SetJwtKey(key)
 
-	r:=gin.Default()
+	r := gin.Default()
 	routes.SetupRoutes(r)
-	r.Run(":"+port)
-	log.Println("server is running in", port)
+
+	log.Println("server is running on port", port)
+
+	r.Run(":" + port)
 }
